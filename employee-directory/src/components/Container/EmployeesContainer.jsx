@@ -53,10 +53,29 @@ class EmployeeContainer extends Component {
             sortedEmployees = this.state.searchFilters.sort((a, b) => {
                 a = a[key];
                 b = b[key];
-
-            })
+                
+                // if the search for given input is equal to its comparison then it will sort 
+                // the search with the other child onject
+                if(primary) {
+                    if (secondary && a[primary] === b[primary]) {
+                        return a[secondary].localeCompare(b[secondary]);
+                    }
+                    return a[primary].localeCompare(b[primary]);
+                } else {
+                    return a.localeCompare(b);
+                }
+            });
+            this.setState({
+                searchFilters: sortedEmployees,
+                informationSort: {
+                    ...this.getSortingInfo,
+                    [key]: "asc",
+                },
+            });
         }
-    }
+    };
+
+    
 
     render() {
         return (  );
