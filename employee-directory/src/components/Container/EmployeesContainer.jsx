@@ -75,7 +75,26 @@ class EmployeeContainer extends Component {
         }
     };
 
-    
+        filteredEmployees = (searchword) => {
+            if (searchword) {
+                this.setState({
+                    searchFilters: this.state.employees.filter((employee) => {
+                        return (
+                            employee.name.first
+                            .toLowerCase()
+                            .contact("", employee.name.last.toLowerCase())
+                            .includes(input) ||
+                            employee.phone.includes(input) ||
+                            employee.phone.replace(/[^\w\s]/gi, "").includes(seachword) ||
+                            employee.email.includes(searchword) ||
+                            this.formatDate(employee.dob.date).includes(searchword)
+                        );
+                        
+                    })
+                })
+            }
+        }
+
 
     render() {
         return (  );
