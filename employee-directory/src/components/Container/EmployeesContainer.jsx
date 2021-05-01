@@ -32,7 +32,7 @@ class EmployeesContainer extends Component {
       .catch((err) => console.log(err));
   }
 
-  // Update search state to filter by employee name
+  // Update search state to filter by employee's name
   handleInputChange = (event) => {
     const value = event.target.value;
     this.setState({ search: value });
@@ -43,8 +43,8 @@ class EmployeesContainer extends Component {
     event.preventDefault();
   };
 
-  // Sort with the key of specified object.
-  // If key has children, sort by primary child and optionally a secondary child. i.e. sort by last name, then first.
+// Sorting it out with the first and last name then 
+// then telling it to look at the last name then first when searching for matches
   sortBy = (key, primary = 0, secondary = 0) => {
     let sortedEmployees = this.state.searchFilter;
     if (this.state.sortDirections[key]) {
@@ -60,8 +60,7 @@ class EmployeesContainer extends Component {
         a = a[key];
         b = b[key];
 
-        // If secondary comparison given and primary comparison is equal
-        // Example: Sorting by last name, if last names are equal, then sort that instance by first name instead.
+        // this is where if the primary search was an exact match it will sort by the secondary child.
         if (primary) {
           if (secondary && a[primary] === b[primary]) {
             return a[secondary].localeCompare(b[secondary]);
@@ -82,19 +81,20 @@ class EmployeesContainer extends Component {
     }
   };
 
-  filterEmployees = (input) => {
-    if (input) {
+  // filtering based off what the input is
+  filterEmployees = (searchInput) => {
+    if (searchInput) {
       this.setState({
         searchFilter: this.state.employees.filter((employee) => {
           return (
             employee.name.first
               .toLowerCase()
               .concat(" ", employee.name.last.toLowerCase())
-              .includes(input) ||
-            employee.phone.includes(input) ||
-            employee.phone.replace(/[^\w\s]/gi, "").includes(input) ||
-            employee.email.includes(input) ||
-            this.formatDate(employee.dob.date).includes(input)
+              .includes(searchInput) ||
+            employee.phone.includes(searchInput) ||
+            employee.phone.replace(/[^\w\s]/gi, "").includes(searchInput) ||
+            employee.email.includes(searchInput) ||
+            this.formatDate(employee.dob.date).includes(searchInput)
           );
         }),
       });
@@ -103,6 +103,7 @@ class EmployeesContainer extends Component {
     }
   };
 
+  // formatting the date and using date.(method) to get the dob
   formatDate = (date) => {
     date = new Date(date);
     let dob = [];

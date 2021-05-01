@@ -1,6 +1,9 @@
 import React from "react";
 import "./style.css"
 
+// creating the employee table and learned how to use the table with github and w3schools
+// <thead> allows to group the header <tr> defines the row <th> defines the cells in the table
+// using this syntax you can use scope="col" to put it into columns
 const EmployeeTable = (props) => {
   return (
     <table className="table table-striped table-sortable text-center">
@@ -28,7 +31,7 @@ const EmployeeTable = (props) => {
           const { first, last } = employee.name;
           const fullName = `${first} ${last}`;
 
-          // Format date
+          
           const dob = props.formatDate(employee.dob.date);
 
           return (
