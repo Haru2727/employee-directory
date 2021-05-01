@@ -1,21 +1,23 @@
-import React from 'react';
+import React from "react";
 import "./style.css";
 
 const SearchBar = (props) => {
-    return (
-        <nav className="navbar navbar-light bg-light justifiy-content-center">
-            <form className="form-inline m-2" onSubmit={props.hanldeFormSubmit}>
-                <input 
-                className="form-control"
-                value={props.value}
-                name="search"
-                onChange={props.handleInputChange}
-                type="search"
-                placeholder="Search"
-                ></input>
-            </form>
-        </nav>
-    )
-}
+  // Setting the component's initial state
+
+  return (
+    <nav className="navbar navbar-light bg-light justify-content-center">
+      <form className="form-inline m-2" onSubmit={props.handleFormSubmit}>
+        <input
+          className="form-control"
+          value={props.value}
+          name="search"
+          onChange={props.handleInputChange}
+          type="search"
+          placeholder="Search"
+        />
+      </form>
+    </nav>
+  );
+};
 
 export default SearchBar;
