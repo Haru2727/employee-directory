@@ -11,7 +11,7 @@ class EmployeesContainer extends Component {
     sortDirections: this.sortingBy,
   };
 
-  get sortingBy() {
+   sortingBy() {
     return {
       name: "",
       phone: "",
@@ -20,7 +20,7 @@ class EmployeesContainer extends Component {
     };
   }
 
-  // When this component mounts, load random users as employees from https://randomuser.me/
+  // loads the page while loading the rest to keep users on page
   componentDidMount() {
     API.getEmployees()
       .then((res) =>
@@ -33,14 +33,14 @@ class EmployeesContainer extends Component {
   }
 
   // Update search state to filter by employee's name
-  handleInputChange = (event) => {
-    const value = event.target.value;
+  handleInputChange = (e) => {
+    const value = e.target.value;
     this.setState({ search: value });
     this.filterEmployees(value.toLowerCase().trim());
   };
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  handleFormSubmit = (e) => {
+    e.preventDefault();
   };
 
 // Sorting it out with the first and last name then 
